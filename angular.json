@@ -21,13 +21,15 @@
             ],
             "tsConfig": "tsconfig.app.json",
             "assets": [
+              "src/assets",
               {
                 "glob": "**/*",
                 "input": "public"
               }
             ],
             "styles": [
-              "src/styles.css"
+              "src/styles.css",
+              "src/app/theme/custom-theme.scss"
             ],
             "scripts": []
           },
@@ -85,7 +87,8 @@
               }
             ],
             "styles": [
-              "src/styles.css"
+              "src/styles.css",
+              "src/app/theme/custom-theme.scss"
             ],
             "scripts": []
           }

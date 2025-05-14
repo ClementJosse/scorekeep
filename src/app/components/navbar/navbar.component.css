@@ -1,9 +1,13 @@
 .toolbar {
   display: flex;
+  justify-items: center;
+  margin-top: 10px;
   justify-content: space-between;
+  border-radius: 15px;
+  width: 400px;
 }
 
-.logo-title {
+.title-text {
   display: flex;
   align-items: center;
   gap: 10px;
@@ -15,8 +19,6 @@
 }
 
 .title {
-  font-weight: bold;
-  font-size: 20px;
   color: white;
 }
 

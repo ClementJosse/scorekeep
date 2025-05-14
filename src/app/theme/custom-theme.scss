@@ -1,39 +1,95 @@
+// Dans un fichier theme.scss
 @use '@angular/material' as mat;
+@include mat.core();
 
-// Couleurs personnalisées
-$primary-color: #5452D5;
-$primary-palette: mat.define-palette((
-  500: $primary-color,
-  600: $primary-color,
-  700: $primary-color,
+// Définir votre palette de couleurs primaire
+$primary-palette: (
+  50: lighten(#5452D5, 40%),
+  100: lighten(#5452D5, 30%),
+  200: lighten(#5452D5, 20%),
+  300: lighten(#5452D5, 10%),
+  400: lighten(#5452D5, 5%),
+  500: #5452D5,  // couleur de base
+  600: darken(#5452D5, 5%),
+  700: darken(#5452D5, 10%),
+  800: darken(#5452D5, 20%),
+  900: darken(#5452D5, 30%),
+  A100: lighten(#5452D5, 25%),
+  A200: lighten(#5452D5, 15%),
+  A400: #5452D5,
+  A700: darken(#5452D5, 15%),
   contrast: (
+    50: rgba(black, 0.87),
+    100: rgba(black, 0.87),
+    200: rgba(black, 0.87),
+    300: rgba(black, 0.87),
+    400: white,
     500: white,
     600: white,
-    700: white
+    700: white,
+    800: white,
+    900: white,
+    A100: rgba(black, 0.87),
+    A200: rgba(black, 0.87),
+    A400: white,
+    A700: white,
   )
-));
+);
 
-$accent-color: #C7BCFE;
-$accent-palette: mat.define-palette((
-  500: $accent-color,
+// Palette accent
+$accent-palette: (
+  50: lighten(#C7BCFE, 40%),
+  100: lighten(#C7BCFE, 30%),
+  200: lighten(#C7BCFE, 20%),
+  300: lighten(#C7BCFE, 10%),
+  400: lighten(#C7BCFE, 5%),
+  500: #C7BCFE,  // couleur de base
+  600: darken(#C7BCFE, 5%),
+  700: darken(#C7BCFE, 10%),
+  800: darken(#C7BCFE, 20%),
+  900: darken(#C7BCFE, 30%),
+  A100: lighten(#C7BCFE, 25%),
+  A200: lighten(#C7BCFE, 15%),
+  A400: #C7BCFE,
+  A700: darken(#C7BCFE, 15%),
   contrast: (
-    500: black
+    50: rgba(black, 0.87),
+    100: rgba(black, 0.87),
+    200: rgba(black, 0.87),
+    300: rgba(black, 0.87),
+    400: rgba(black, 0.87),
+    500: rgba(black, 0.87),
+    600: rgba(black, 0.87),
+    700: rgba(black, 0.87),
+    800: white,
+    900: white,
+    A100: rgba(black, 0.87),
+    A200: rgba(black, 0.87),
+    A400: rgba(black, 0.87),
+    A700: rgba(black, 0.87),
   )
-));
+);
 
-$warn-palette: mat.define-palette(mat.$red-palette);
+// Créer le thème personnalisé avec la syntaxe M2
+$app-primary: mat.m2-define-palette($primary-palette, A400, A100, A700);
+$app-accent: mat.m2-define-palette($accent-palette);
+$app-warn: mat.m2-define-palette(mat.$m2-red-palette);
 
-// Définir le thème
-$custom-theme: mat.define-light-theme((
+// Créer le thème light avec la syntaxe M2
+$app-theme: mat.m2-define-light-theme((
   color: (
-    primary: $primary-palette,
-    accent: $accent-palette,
-    warn: $warn-palette
-  ),
-  typography: mat.define-typography-config(),
-  density: 0,
+    primary: $app-primary,
+    accent: $app-accent,
+    warn: $app-warn,
+  )
 ));
 
 // Appliquer le thème à Angular Material
-@include mat.core();
-@include mat.all-component-themes($custom-theme);
+@include mat.all-component-themes($app-theme);
+
+// Mettre également à disposition les variables CSS si nécessaire
+:root {
+  --primary: #5452D5;
+  --accent: #C7BCFE;
+  --background: #F7F3FF;
+}
