@@ -28,8 +28,7 @@
               }
             ],
             "styles": [
-              "src/styles.css",
-              "src/app/theme/custom-theme.scss"
+              "src/styles.css"
             ],
             "scripts": []
           },
@@ -87,8 +86,7 @@
               }
             ],
             "styles": [
-              "src/styles.css",
-              "src/app/theme/custom-theme.scss"
+              "src/styles.css"
             ],
             "scripts": []
           }
