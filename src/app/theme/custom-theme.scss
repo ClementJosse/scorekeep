@@ -1,0 +1,39 @@
+@use '@angular/material' as mat;
+
+// Couleurs personnalisées
+$primary-color: #5452D5;
+$primary-palette: mat.define-palette((
+  500: $primary-color,
+  600: $primary-color,
+  700: $primary-color,
+  contrast: (
+    500: white,
+    600: white,
+    700: white
+  )
+));
+
+$accent-color: #C7BCFE;
+$accent-palette: mat.define-palette((
+  500: $accent-color,
+  contrast: (
+    500: black
+  )
+));
+
+$warn-palette: mat.define-palette(mat.$red-palette);
+
+// Définir le thème
+$custom-theme: mat.define-light-theme((
+  color: (
+    primary: $primary-palette,
+    accent: $accent-palette,
+    warn: $warn-palette
+  ),
+  typography: mat.define-typography-config(),
+  density: 0,
+));
+
+// Appliquer le thème à Angular Material
+@include mat.core();
+@include mat.all-component-themes($custom-theme);
