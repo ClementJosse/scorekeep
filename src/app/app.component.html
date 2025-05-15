@@ -1,6 +1,13 @@
-<main class="main flex-col flex items-center">
-  <app-navbar></app-navbar>
-  <app-players></app-players>
+<!-- Si on se trouve sur la page "scorekeep.cjosse.com/"-->
+<main class="main flex-col flex items-center h-full">
+  <app-home></app-home>
 </main>
+<app-footer></app-footer>
+
+<!-- Sinon-->
+<main class="main flex-col flex items-center h-full">
+  <app-game></app-game>
+</main>
+<app-footer></app-footer>
 
 <router-outlet></router-outlet>
