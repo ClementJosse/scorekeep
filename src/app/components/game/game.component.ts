@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { NavbarComponent } from '../navbar/navbar.component';
 import { Router } from '@angular/router';
-import { database } from '../../firebase'; // Assurez-vous que le chemin est correct
+import { database } from '../../firebase'; 
 import { ref, onValue } from "firebase/database";
 
 @Component({
