@@ -10,7 +10,7 @@ import { FooterComponent } from './components/footer/footer.component';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  imports: [RouterOutlet, HomeComponent, GameComponent, FooterComponent],
+  imports: [RouterOutlet, FooterComponent],
 })
 export class AppComponent {
   constructor(public router: Router) {}
