@@ -1,7 +1,38 @@
 <app-navbar></app-navbar>
+
 <div class="flex w-full justify-center">
   <div class="w-[clamp(0px,90vw,600px)]">
     <h2 class="text-primary font-semibold text-2xl">Joueurs:</h2>
-    <img src="/assets/more.svg" alt="more" class="w-10 h-10" />
+
+    <div class="grid grid-cols-[auto_1fr] gap-2">
+      <!-- Numéros -->
+      <div class="flex flex-col justify-start items-end">
+        <div *ngFor="let joueur of joueurs; let i = index"
+          class="text-primary font-semibold h-[36px] flex items-center">
+          {{ i + 1 }}:
+        </div>
+      </div>
+
+      <!-- Joueurs drag & drop -->
+      <div cdkDropList (cdkDropListDropped)="drop($event)">
+        <div *ngFor="let joueur of joueurs; let i = index" cdkDrag class="flex items-center gap-2 my-1">
+          <span class="text-white bg-primary rounded px-2 py-1 cursor-move" cdkDragHandle>
+            ☰
+          </span>
+          <input class="bg-primary text-white px-3 py-1 rounded-lg w-full focus:outline-none" [(ngModel)]="joueur.nom"
+            [placeholder]="'Joueur ' + (i + 1)" />
+
+          <button (click)="supprimerJoueur(i)"
+            class="text-white bg-primary rounded-full w-6 h-6 flex items-center justify-center">
+            ×
+          </button>
+        </div>
+      </div>
+    </div>
+
+
+    <button (click)="ajouterJoueur()" class="mt-2">
+      <img src="/assets/more.svg" alt="Ajouter" class="w-10 h-10" />
+    </button>
   </div>
 </div>
