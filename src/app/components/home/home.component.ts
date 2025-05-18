@@ -19,7 +19,10 @@ export class HomeComponent {
     this.joueurs.push({ nom: '' });
   }
 
+  adjustInputWidth(event: Event): void {
+  }
 
+  Math = Math;
   supprimerJoueur(index: number) {
     this.joueurs.splice(index, 1);
   }
