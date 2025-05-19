@@ -1,47 +1,60 @@
 import { Component, OnInit } from '@angular/core';
 import { NavbarComponent } from '../navbar/navbar.component';
 import { Router } from '@angular/router';
-import { database } from '../../firebase'; 
+import { database } from '../../firebase';
 import { ref, onValue } from "firebase/database";
+import { LoaderComponent } from "../loader/loader.component";
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-game',
-  imports: [NavbarComponent],
+  standalone: true,
+  imports: [NavbarComponent, LoaderComponent, CommonModule],
   templateUrl: './game.component.html',
   styleUrls: ['./game.component.css']
 })
 export class GameComponent implements OnInit {
   currentValue: string | null = null;
   key: string | null = null;
-  constructor(private router: Router) {}
 
-ngOnInit() {
-  console.log("Initializing GameComponent");
+  constructor(private router: Router) { }
 
-  const key = this.router.url.substring(1);
-  console.log("Key:", key);
+  ngOnInit() {
+    console.log("Initializing GameComponent");
 
-  if (!key) {
-    console.error("No key found in URL");
-    return;
+    const key = this.router.url.substring(1);
+    console.log("Key:", key);
+
+    if (!key) {
+      console.error("No key found in URL");
+      return;
+    }
+
+    const dbRef = ref(database, `/${key}`);
+    console.log("Database reference created");
+
+    onValue(dbRef, (snapshot) => {
+      console.log("Data snapshot received");
+      const data = snapshot.val();
+      if (data) {
+        this.currentValue = data;
+        console.log("Data:", data);
+      } else {
+        this.currentValue = 'No data available';
+        console.log("No data available");
+      }
+    }, (error) => {
+      console.error("Error reading data:", error);
+    });
   }
 
-  const dbRef = ref(database, `/${key}`);
-  console.log("Database reference created");
-
-  onValue(dbRef, (snapshot) => {
-    console.log("Data snapshot received");
-    const data = snapshot.val();
-    if (data) {
-      this.currentValue = data;
-      console.log("Data:", data);
+  getMenuOption(): string {
+    if (this.currentValue === 'No data available') {
+      console.log("notfound")
+      return 'notfound';
     } else {
-      this.currentValue = 'No data available';
-      console.log("No data available");
+      console.log("ingame")
+      return 'ingame';
     }
-  }, (error) => {
-    console.error("Error reading data:", error);
-  });
-}
-
+  }
 }

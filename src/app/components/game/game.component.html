@@ -1,2 +1,13 @@
-<app-navbar></app-navbar>
-<div>Current URI: {{ currentValue }}</div>
+<div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
+    <app-loader *ngIf="currentValue === null"></app-loader>
+</div>
+
+<ng-container *ngIf="currentValue !== null">
+    <app-navbar [menuOption]="getMenuOption()"></app-navbar>
+    <div *ngIf="currentValue === 'No data available'" class="not-found-message">
+        Partie introuvable
+    </div>
+    <div *ngIf="currentValue !== 'No data available'" class="current-value">
+        Current URI: {{ currentValue }}
+    </div>
+</ng-container>

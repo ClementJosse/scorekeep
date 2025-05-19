@@ -30,4 +30,14 @@ export class HomeComponent {
   drop(event: CdkDragDrop<any[]>) {
     moveItemInArray(this.joueurs, event.previousIndex, event.currentIndex);
   }
+
+  everyoneIsHere(): boolean {
+    return this.joueurs.length > 0 && this.joueurs.every(joueur => joueur.nom.trim() !== '');
+  }
+
+  startGame(): void {
+    if (this.everyoneIsHere()) {
+      console.log("start");
+    }
+  }
 }

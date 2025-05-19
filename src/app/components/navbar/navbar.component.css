@@ -1,0 +1,11 @@
+/* navbar.component.css */
+.navbar {
+  position: relative;
+  z-index: 2; /* Assure que la navbar est au-dessus du menu */
+}
+
+.menu {
+  position: relative;
+  z-index: 1; /* Assure que le menu est sous la navbar */
+  margin-top: -50px; /* Ajustez cette valeur pour contrôler le chevauchement */
+}
