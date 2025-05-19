@@ -15,14 +15,25 @@ import { Router } from '@angular/router';
 export class NavbarComponent {
   @Input() menuOption: string | null = null;
   isMenuOpen = false;
+  hasBeenOpened = false;
 
-  constructor(private router: Router) {}
-
-  
-  toggleMenu() {
-    this.isMenuOpen = !this.isMenuOpen;
-  }
-    isHomePage(): boolean {
+  constructor(private router: Router) { }
+  isHomePage(): boolean {
     return this.router.url === '/';
+  }
+  toggleMenu() {
+    if (!this.isMenuOpen) {
+      this.hasBeenOpened = true;
+    }
+    this.isMenuOpen = !this.isMenuOpen;
+
+    // Optionnel : supprimer l'élément du DOM après l'animation de fermeture
+    if (!this.isMenuOpen) {
+      setTimeout(() => {
+        if (!this.isMenuOpen) {
+          this.hasBeenOpened = false;
+        }
+      }, 1000); // Attendre la fin de l'animation (3s)
+    }
   }
 }

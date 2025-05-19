@@ -9,3 +9,37 @@
   z-index: 1; /* Assure que le menu est sous la navbar */
   margin-top: -50px; /* Ajustez cette valeur pour contrôler le chevauchement */
 }
+
+/* Animation CSS pour l'ouverture du menu */
+.menu-open {
+  animation: slideInDown .2s ease-out forwards;
+}
+
+/* Animation CSS pour la fermeture du menu */
+.menu-close {
+  animation: slideOutUp .2s ease-in forwards;
+}
+
+/* Keyframes pour l'ouverture (0% opacité + translation -200px vers 100% opacité + position normale) */
+@keyframes slideInDown {
+  from {
+    opacity: 0;
+    transform: translateY(-30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Keyframes pour la fermeture (animation inverse) */
+@keyframes slideOutUp {
+  from {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  to {
+    opacity: 0;
+    transform: translateY(-30px);
+  }
+}

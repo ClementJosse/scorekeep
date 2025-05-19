@@ -8,19 +8,24 @@
     </div>
     <img src="/assets/menu.svg" alt="menu" class="w-14 h-14" (click)="toggleMenu()" />
   </div>
-  <div *ngIf="isMenuOpen"
-    class="bg-rose flex flex-col items-center w-[clamp(0px,90vw,600px)] pt-[70px] inner-border-2 inner-border-primary rounded-2xl p-3 mt-1 mx-5 menu">
-    <button *ngIf="isHomePage()" class="min-w-full bg-secondary text-white p-2 rounded mb-2">Supprimer tous les
-      joueurs
+  
+  <!-- Avec transitions CSS -->
+  <div 
+    class="bg-rose flex flex-col items-center w-[clamp(0px,90vw,600px)] pt-[70px] inner-border-2 inner-border-primary rounded-2xl p-3 mt-1 mx-5 menu"
+    [class.menu-open]="isMenuOpen"
+    [class.menu-close]="!isMenuOpen && hasBeenOpened"
+    *ngIf="isMenuOpen || hasBeenOpened">
+    <button *ngIf="isHomePage()" class="min-w-full bg-secondary text-white p-2 rounded mb-2">
+      Supprimer tous les joueurs
     </button>
-    <button *ngIf="menuOption === 'notfound'" class="min-w-full bg-secondary text-white p-2 rounded mb-2">Retourner au
-      menu principal
+    <button *ngIf="menuOption === 'notfound'" class="min-w-full bg-secondary text-white p-2 rounded mb-2">
+      Retourner au menu principal
     </button>
-    <button *ngIf="menuOption === 'ingame'" class="min-w-full bg-secondary text-white p-2 rounded mb-2">Retourner au
-      menu principal
+    <button *ngIf="menuOption === 'ingame'" class="min-w-full bg-secondary text-white p-2 rounded mb-2">
+      Retourner au menu principal
     </button>
-    <button *ngIf="menuOption === 'ingame'" class="min-w-full bg-secondary text-white p-2 rounded mb-2">Effacer tous les
-      scores
+    <button *ngIf="menuOption === 'ingame'" class="min-w-full bg-secondary text-white p-2 rounded mb-2">
+      Effacer tous les scores
     </button>
   </div>
 </div>
