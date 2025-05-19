@@ -6,14 +6,16 @@
       <span class="text-rose font-extrabold text-3xl" alt="scorekeep">scorekeep</span>
       <span class="text-secondary font-semibold text-center text-base" alt="cjosse.com">cjosse.com</span>
     </div>
-    <img src="/assets/menu.svg" alt="menu" class="w-14 h-14" (click)="toggleMenu()" />
+    <svg (click)="toggleMenu()" width="51" height="51" viewBox="0 0 51 51" fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+      class="cursor-pointer w-14 h-14 fill-primary fill-rose hover:fill-secondary rounded-full">
+      <path
+        d="M39.1665 35.089L39.3706 35.0988C40.3792 35.2011 41.1665 36.0534 41.1665 37.089C41.1664 38.1245 40.3791 38.9759 39.3706 39.0782L39.1665 39.089H12.4302C11.3257 39.089 10.4303 38.1935 10.4302 37.089C10.4302 35.9844 11.3256 35.089 12.4302 35.089H39.1665ZM39.1665 23.5177L39.3706 23.5275C40.3792 23.6298 41.1665 24.4821 41.1665 25.5177C41.1664 26.5532 40.3792 27.4046 39.3706 27.507L39.1665 27.5177H12.4302C11.3256 27.5177 10.4302 26.6222 10.4302 25.5177C10.4302 24.4131 11.3256 23.5177 12.4302 23.5177H39.1665ZM39.1665 11.9464L39.3706 11.9572C40.3792 12.0595 41.1665 12.9108 41.1665 13.9464C41.1665 14.982 40.3792 15.8333 39.3706 15.9357L39.1665 15.9464H12.4302C11.3256 15.9464 10.4302 15.051 10.4302 13.9464C10.4302 12.8418 11.3256 11.9464 12.4302 11.9464H39.1665Z" />
+    </svg>
   </div>
-  
-  <!-- Avec transitions CSS -->
-  <div 
+  <div
     class="bg-rose flex flex-col items-center w-[clamp(0px,90vw,600px)] pt-[70px] inner-border-2 inner-border-primary rounded-2xl p-3 mt-1 mx-5 menu"
-    [class.menu-open]="isMenuOpen"
-    [class.menu-close]="!isMenuOpen && hasBeenOpened"
+    [class.menu-open]="isMenuOpen" [class.menu-close]="!isMenuOpen && hasBeenOpened"
     *ngIf="isMenuOpen || hasBeenOpened">
     <button *ngIf="isHomePage()" class="min-w-full bg-secondary text-white p-2 rounded mb-2">
       Supprimer tous les joueurs

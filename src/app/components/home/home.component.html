@@ -1,49 +1,50 @@
 <app-navbar></app-navbar>
 
 <div class="flex flex-col w-fit mx-5 justify-center">
-  <h2 class="text-primary font-semibold text-2xl">Joueurs:</h2>
+  <h2 class="text-primary font-semibold mt-[200px] text-2xl mb-2">Joueurs:</h2>
+  <div class="min-h-[250px] mb-[100px]">
+    <div class="flex">
+      <!-- Numéros (en dehors du drag & drop) -->
+      <div class="flex flex-col gap-2">
+        <div *ngFor="let joueur of joueurs; let i = index"
+          class="text-secondary font-semibold h-[32px] min-w-[30px] flex items-center justify-center">
+          {{ i + 1 }}
+        </div>
+      </div>
 
-  <div class="flex">
-    <!-- Numéros (en dehors du drag & drop) -->
-    <div class="flex flex-col gap-2">
-      <div *ngFor="let joueur of joueurs; let i = index"
-        class="text-secondary font-semibold h-[32px] min-w-[30px] flex items-center justify-center">
-        {{ i + 1 }}
+      <!-- Joueurs drag & drop -->
+      <div cdkDropList (cdkDropListDropped)="drop($event)" class="flex flex-col gap-2">
+        <div *ngFor="let joueur of joueurs; let i = index" cdkDrag
+          class="flex items-center bg-primary rounded-lg w-fit">
+          <span class="text-secondary px-2 py-1 cursor-move active:text-rose" cdkDragHandle>
+            ☰
+          </span>
+          <input #inputRef
+            class="text-rose font-semibold bg-primary py-1 rounded-lg focus:outline-none placeholder-secondary placeholder:font-medium border-none"
+            [(ngModel)]="joueur.nom" [placeholder]="'Joueur ' + (i + 1)"
+            [style.width.ch]="Math.max(joueur.nom.length || 0, ('Joueur ' + (i + 1)).length) - 1"
+            (input)="adjustInputWidth($event)" />
+
+          <button (click)="supprimerJoueur(i)"
+            class="text-secondary w-6 h-6 rounded-full flex items-center justify-center hover:text-rose">
+            ×
+          </button>
+        </div>
       </div>
     </div>
 
-    <!-- Joueurs drag & drop -->
-    <div cdkDropList (cdkDropListDropped)="drop($event)" class="flex flex-col gap-2">
-      <div *ngFor="let joueur of joueurs; let i = index" cdkDrag class="flex items-center bg-primary rounded-lg w-fit">
-        <span class="text-secondary px-2 py-1 cursor-move active:text-rose" cdkDragHandle>
-          ☰
-        </span>
-        <input #inputRef
-          class="text-rose font-semibold bg-primary py-1 rounded-lg focus:outline-none placeholder-secondary placeholder:font-medium border-none"
-          [(ngModel)]="joueur.nom" [placeholder]="'Joueur ' + (i + 1)"
-          [style.width.ch]="Math.max(joueur.nom.length || 0, ('Joueur ' + (i + 1)).length) - 1"
-          (input)="adjustInputWidth($event)" />
-
-        <button (click)="supprimerJoueur(i)"
-          class="text-secondary w-6 h-6 rounded-full flex items-center justify-center hover:text-rose">
-          ×
-        </button>
-      </div>
-    </div>
+    <button (click)="ajouterJoueur()" class="mt-2 self-start group">
+      <svg width="30" height="30" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg"
+        class="transition-colors">
+        <path fill-rule="evenodd" clip-rule="evenodd"
+          d="M15.1114 0.214203C7.14726 0.21436 0.691467 6.67093 0.691467 14.6351C0.69164 22.5991 7.14736 29.0549 15.1114 29.055C23.0755 29.055 29.5321 22.5992 29.5323 14.6351C29.5323 6.67084 23.0757 0.214203 15.1114 0.214203ZM15.7149 6.97006C16.2232 6.97097 16.6349 7.38239 16.6329 7.88803L16.6446 13.1029L21.8594 13.1097C22.3679 13.1104 22.7802 13.522 22.7784 14.0277L22.7823 15.2533C22.7829 15.7618 22.3721 16.1726 21.8663 16.1693L16.6407 16.1615L16.6475 21.3851C16.6482 21.8936 16.2373 22.3045 15.7315 22.3011L14.5089 22.2992C14.0004 22.2984 13.5888 21.887 13.5909 21.3812L13.5792 16.1664L8.36334 16.1595C7.85495 16.1587 7.44332 15.7473 7.44537 15.2415L7.44147 14.016C7.44094 13.5075 7.85172 13.0966 8.35748 13.0999L13.5831 13.1068L13.5762 7.88412C13.5756 7.37562 13.9864 6.96476 14.4922 6.96811L15.7149 6.97006Z"
+          class="fill-primary group-active:fill-secondary transition-colors" />
+      </svg>
+    </button>
   </div>
-
-  <button (click)="ajouterJoueur()" class="mt-4 self-start group">
-    <svg width="30" height="30" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg"
-      class="transition-colors">
-      <path fill-rule="evenodd" clip-rule="evenodd"
-        d="M15.1114 0.214203C7.14726 0.21436 0.691467 6.67093 0.691467 14.6351C0.69164 22.5991 7.14736 29.0549 15.1114 29.055C23.0755 29.055 29.5321 22.5992 29.5323 14.6351C29.5323 6.67084 23.0757 0.214203 15.1114 0.214203ZM15.7149 6.97006C16.2232 6.97097 16.6349 7.38239 16.6329 7.88803L16.6446 13.1029L21.8594 13.1097C22.3679 13.1104 22.7802 13.522 22.7784 14.0277L22.7823 15.2533C22.7829 15.7618 22.3721 16.1726 21.8663 16.1693L16.6407 16.1615L16.6475 21.3851C16.6482 21.8936 16.2373 22.3045 15.7315 22.3011L14.5089 22.2992C14.0004 22.2984 13.5888 21.887 13.5909 21.3812L13.5792 16.1664L8.36334 16.1595C7.85495 16.1587 7.44332 15.7473 7.44537 15.2415L7.44147 14.016C7.44094 13.5075 7.85172 13.0966 8.35748 13.0999L13.5831 13.1068L13.5762 7.88412C13.5756 7.37562 13.9864 6.96476 14.4922 6.96811L15.7149 6.97006Z"
-        class="fill-primary group-active:fill-secondary transition-colors" />
-    </svg>
-  </button>
-
   <p class="flex justify-center text-sm text-primary font-semibold">L’ordre des joueurs détermine l'ordre des colonnes.
   </p>
-  <button (click)="startGame()" class="w-[clamp(0px,90vw,600px)] py-5 font-semibold text-2xl rounded-2xl" [ngClass]="{
+  <button (click)="startGame()" class="w-[clamp(0px,90vw,600px)] py-5 font-semibold text-2xl rounded-2xl mb-40" [ngClass]="{
       'inner-border-2 inner-border-secondary text-secondary': !everyoneIsHere(),
       'bg-secondary text-primary active:inner-border-2 inner-border-primary': everyoneIsHere()
     }">
