@@ -7,7 +7,30 @@
     <div *ngIf="currentValue === 'No data available'" class="not-found-message">
         Partie introuvable
     </div>
-    <div *ngIf="currentValue !== 'No data available'" class="current-value">
-        Current URI: {{ currentValue }}
+
+    <div *ngIf="currentValue !== 'No data available'" class="flex justify-center mt-[200px]">
+        <table class="table-auto border-collapse bg-gray-50 shadow-lg rounded-md">
+            <thead>
+                <tr>
+                    <th *ngFor="let player of playerNames"
+                        class="px-4 py-2 border border-gray-300 bg-gray-200 font-bold">
+                        {{ player }}
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let round of [].constructor(maxRounds); let i = index">
+                    <td *ngFor="let player of playerScores; let j = index"
+                        class="px-4 py-2 border border-gray-300 text-center">
+                        {{ getScoreForRound(j, i) !== null ? getScoreForRound(j, i) : '' }}
+                    </td>
+                </tr>
+                <tr class="bg-gray-200 font-semibold">
+                    <td *ngFor="let total of totalScores" class="px-4 py-2 border border-gray-300 text-center">
+                        Total: {{ total }}
+                    </td>
+                </tr>
+            </tbody>
+        </table>
     </div>
 </ng-container>
