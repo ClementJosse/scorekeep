@@ -1,6 +1,6 @@
 <div class="absolute left-1/2 transform -translate-x-1/2">
   <div
-    class="bg-primary flex flex-row justify-between items-center w-[clamp(0px,90vw,600px)] h-100 rounded-2xl p-3 mt-5 mx-5 navbar">
+    class="bg-primary flex flex-row justify-between items-center w-[clamp(0px,85vw,600px)] h-100 rounded-2xl p-3 mt-5 mx-5 navbar">
     <img src="/assets/logo.svg" alt="logo" class="w-14 h-14" />
     <div class="flex flex-col">
       <span class="text-rose font-extrabold text-3xl" alt="scorekeep">scorekeep</span>
@@ -15,7 +15,7 @@
 
   </div>
   <div
-    class="bg-rose flex flex-col items-center w-[clamp(0px,90vw,600px)] pt-[70px] inner-border-2 inner-border-primary rounded-2xl p-3 mt-1 mx-5 menu"
+    class="bg-rose flex flex-col items-center w-[clamp(0px,85vw,600px)] pt-[70px] inner-border-2 inner-border-primary rounded-2xl p-3 mt-1 mx-5 menu"
     [class.menu-open]="isMenuOpen" [class.menu-close]="!isMenuOpen && hasBeenOpened"
     *ngIf="isMenuOpen || hasBeenOpened">
     <button *ngIf="isHomePage()" class="min-w-full bg-secondary text-white p-2 rounded mb-2">

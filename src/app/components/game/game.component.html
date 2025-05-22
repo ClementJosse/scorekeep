@@ -8,29 +8,58 @@
         Partie introuvable
     </div>
 
-    <div *ngIf="currentValue !== 'No data available'" class="flex justify-center mt-[200px]">
-        <table class="table-auto border-collapse bg-gray-50 shadow-lg rounded-md">
-            <thead>
-                <tr>
-                    <th *ngFor="let player of playerNames"
-                        class="px-4 py-2 border border-gray-300 bg-gray-200 font-bold">
-                        {{ player }}
-                    </th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr *ngFor="let round of [].constructor(maxRounds); let i = index">
-                    <td *ngFor="let player of playerScores; let j = index"
-                        class="px-4 py-2 border border-gray-300 text-center">
-                        {{ getScoreForRound(j, i) !== null ? getScoreForRound(j, i) : '' }}
-                    </td>
-                </tr>
-                <tr class="bg-gray-200 font-semibold">
-                    <td *ngFor="let total of totalScores" class="px-4 py-2 border border-gray-300 text-center">
-                        Total: {{ total }}
-                    </td>
-                </tr>
-            </tbody>
-        </table>
+    <div class="flex justify-center mt-[200px]">
+        <!-- Colonne indices -->
+        <div class="flex flex-col min-w-[30px] w-[30px] mr-1">
+            <div class="h-[40px]"></div>
+            <div *ngFor="let round of [].constructor(maxRounds); let i = index"
+                class="h-[40px] flex items-center justify-center text-secondary font-semibold">
+                T{{ i + 1 }}
+            </div>
+            <div class="h-[40px] flex items-center justify-center font-semibold text-secondary">+=</div>
+        </div>
+
+        <!-- Zone scrollable tableau -->
+        <div class="overflow-x-auto max-w-[clamp(0px,85vw,600px)] rounded-xl border border-primary">
+            <table class="min-w-max overflow-hidden">
+                <thead>
+                    <tr class="bg-secondary text-primary text-lg font-bold">
+                        <th *ngFor="let player of playerNames" class="w-[85px] h-[40px] text-center">
+                            {{ player }}
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let round of [].constructor(maxRounds); let i = index">
+                        <td *ngFor="let player of playerNames; let j = index"
+                            class="h-[40px] text-center text-primary font-medium text-lg border-t border-primary"
+                            (click)="editCell(j, i)">
+                            <ng-container *ngIf="!isEditing(j, i); else editTemplate">
+                                {{ getScoreForRound(j, i) !== null ? getScoreForRound(j, i) : '' }}
+                            </ng-container>
+                            <ng-template #editTemplate>
+                                <input type="number"
+                                    [value]="getScoreForRound(j, i) !== null ? getScoreForRound(j, i) : ''"
+                                    class="h-[30px] w-[70px] text-center bg-secondary text-primary rounded-md outline-none"
+                                    (blur)="saveCell(j, i, $event)" (keydown.enter)="saveCell(j, i, $event)"
+                                    #scoreInput>
+                            </ng-template>
+                        </td>
+                    </tr>
+                    <tr class="font-bold text-lg">
+                        <td *ngFor="let total of totalScores" class="h-[40px] text-center align-middle">
+                            <div
+                                class="h-[30px] w-[70px] mx-auto flex items-center justify-center bg-primary text-rose rounded-md">
+                                {{ total }}
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Colonne vide droite -->
+        <div class="min-w-[30px] w-[30px] ml-1"></div>
     </div>
+
 </ng-container>
