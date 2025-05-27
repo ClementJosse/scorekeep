@@ -32,7 +32,7 @@
                 <tbody>
                     <tr *ngFor="let round of [].constructor(maxRounds); let i = index">
                         <td *ngFor="let player of playerNames; let j = index"
-                            class="h-[40px] text-center text-primary font-medium text-lg border-t border-primary"
+                            class="h-[40px]  text-center text-primary font-medium text-lg border-t border-secondary"
                             (click)="editCell(j, i)">
                             <ng-container *ngIf="!isEditing(j, i); else editTemplate">
                                 {{ getScoreForRound(j, i) !== null ? getScoreForRound(j, i) : '' }}
@@ -61,5 +61,5 @@
         <!-- Colonne vide droite -->
         <div class="min-w-[30px] w-[30px] ml-1"></div>
     </div>
-
+    <app-qrcode></app-qrcode>
 </ng-container>

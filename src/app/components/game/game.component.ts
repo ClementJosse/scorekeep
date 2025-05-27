@@ -5,11 +5,12 @@ import { database } from '../../firebase';
 import { ref, onValue, update } from 'firebase/database';
 import { LoaderComponent } from '../loader/loader.component';
 import { CommonModule } from '@angular/common';
+import { QrcodeComponent } from "../qrcode/qrcode.component";
 
 @Component({
   selector: 'app-game',
   standalone: true,
-  imports: [NavbarComponent, LoaderComponent, CommonModule],
+  imports: [NavbarComponent, LoaderComponent, CommonModule, QrcodeComponent],
   templateUrl: './game.component.html',
   styleUrls: ['./game.component.css']
 })
